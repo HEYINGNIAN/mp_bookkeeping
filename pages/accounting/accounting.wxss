@@ -1,0 +1,493 @@
+/* pages/accounting/accounting.wxss - 响应式主题样式 */
+
+/* 全局主题变量引用 */
+.page-container {
+  background: var(--theme-background, #0f1a2e);
+  color: var(--theme-text-primary, #ffffff);
+  min-height: 100vh;
+}
+
+/* 卡片样式 */
+.card {
+  background: var(--theme-card-bg, rgba(102, 126, 234, 0.15));
+  border: 1rpx solid var(--theme-card-border, rgba(102, 126, 234, 0.4));
+  box-shadow: 0 8rpx 24rpx var(--theme-shadow, rgba(102, 126, 234, 0.5));
+}
+.container {
+  padding: 20rpx;
+  background: linear-gradient(180deg, #0f1a2e 0%, #1a0f2e 100%);
+  min-height: 100vh;
+}
+
+/* 统计卡片 */
+.stats-section {
+  margin-bottom: 30rpx;
+}
+
+.stats-card {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+  border: 2rpx solid rgba(102, 126, 234, 0.4);
+  box-shadow: 0 0 30rpx rgba(102, 126, 234, 0.3);
+}
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid rgba(0, 255, 136, 0.2);
+}
+
+.stats-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stats-period {
+  font-size: 24rpx;
+  color: #cccccc;
+}
+
+.stats-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999999;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.stat-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  display: block;
+}
+
+.stat-item.income .stat-value {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-item.expense .stat-value {
+  color: #ff6b6b;
+}
+
+.stat-item.balance .stat-value.positive {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-item.balance .stat-value.negative {
+  color: #ff6b6b;
+}
+
+/* 操作按钮 */
+.actions-section {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  padding: 25rpx;
+  font-size: 28rpx;
+}
+
+.btn-icon {
+  font-size: 32rpx;
+}
+
+/* 筛选区域 */
+.filter-section {
+  margin-bottom: 30rpx;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1rpx solid rgba(0, 255, 136, 0.2);
+  margin-bottom: 20rpx;
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 28rpx;
+}
+
+.search-icon {
+  font-size: 32rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-left: 10rpx;
+}
+
+.type-filter {
+  white-space: nowrap;
+}
+
+.filter-item {
+  display: inline-block;
+  padding: 15rpx 30rpx;
+  margin-right: 20rpx;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1rpx solid rgba(0, 255, 136, 0.2);
+  border-radius: 25rpx;
+  color: #cccccc;
+  font-size: 26rpx;
+  transition: all 0.3s ease;
+}
+
+.filter-item.active {
+  background: rgba(0, 255, 136, 0.2);
+  border-color: #00ff88;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 交易列表 */
+.transactions-list {
+  margin-bottom: 40rpx;
+}
+
+.transaction-item {
+  margin-bottom: 20rpx;
+  transition: all 0.3s ease;
+}
+
+.transaction-item:active {
+  transform: scale(0.98);
+}
+
+.transaction-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.transaction-icon {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  margin-right: 20rpx;
+}
+
+.transaction-icon.income {
+  background: rgba(0, 255, 136, 0.2);
+}
+
+.transaction-icon.expense {
+  background: rgba(255, 107, 107, 0.2);
+}
+
+.transaction-info {
+  flex: 1;
+}
+
+.transaction-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.transaction-category {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.transaction-amount {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.transaction-amount.income {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.transaction-amount.expense {
+  color: #ff6b6b;
+}
+
+.transaction-content {
+  margin-bottom: 20rpx;
+}
+
+.transaction-field {
+  display: flex;
+  margin-bottom: 10rpx;
+}
+
+.field-label {
+  font-size: 24rpx;
+  color: #999999;
+  width: 100rpx;
+  flex-shrink: 0;
+}
+
+.field-value {
+  font-size: 26rpx;
+  color: #cccccc;
+  flex: 1;
+}
+
+.transaction-actions {
+  display: flex;
+  gap: 20rpx;
+  justify-content: flex-end;
+  padding-top: 15rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.action-btn {
+  font-size: 28rpx;
+  padding: 10rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.action-btn:active {
+  background: rgba(0, 255, 136, 0.2);
+  transform: scale(0.9);
+}
+
+/* 弹窗样式 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 600rpx;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-close {
+  font-size: 40rpx;
+  color: #999999;
+  padding: 10rpx;
+}
+
+.modal-body {
+  margin-bottom: 30rpx;
+}
+
+.type-selector {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.type-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30rpx 20rpx;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2rpx solid rgba(0, 255, 136, 0.2);
+  border-radius: 15rpx;
+  transition: all 0.3s ease;
+}
+
+.type-option.active {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: #00ff88;
+}
+
+.type-icon {
+  font-size: 40rpx;
+  margin-bottom: 10rpx;
+}
+
+.type-text {
+  font-size: 28rpx;
+  color: #cccccc;
+}
+
+.type-option.active .type-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.input-group {
+  margin-bottom: 30rpx;
+}
+
+.input-label {
+  font-size: 28rpx;
+  color: #cccccc;
+  display: block;
+  margin-bottom: 15rpx;
+}
+
+.input-field {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1rpx solid rgba(0, 255, 136, 0.3);
+  border-radius: 15rpx;
+  padding: 30rpx 20rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 1.5;
+  min-height: 90rpx;
+}
+
+.amount-input {
+  font-size: 36rpx;
+  font-weight: bold;
+  text-align: center;
+}
+
+.picker-field {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1rpx solid rgba(0, 255, 136, 0.3);
+  border-radius: 15rpx;
+  padding: 30rpx 20rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+.textarea-field {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1rpx solid rgba(0, 255, 136, 0.3);
+  border-radius: 15rpx;
+  padding: 30rpx 20rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  width: 100%;
+  height: 120rpx;
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 20rpx;
+}
+
+.modal-footer button {
+  flex: 1;
+}
+
+/* 引导提示样式 */
+.guide-tip {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600rpx;
+  z-index: 999;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.guide-content {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  padding: 40rpx;
+  box-shadow: 0 10rpx 40rpx rgba(0, 0, 0, 0.1);
+  border: 2rpx solid rgba(102, 126, 234, 0.3);
+}
+
+.guide-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  display: block;
+}
+
+.guide-item {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+  line-height: 1.5;
+}
+
+.guide-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.btn-primary.small, .btn-secondary.small {
+  flex: 1;
+  font-size: 28rpx;
+  padding: 20rpx 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}

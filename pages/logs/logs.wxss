@@ -1,0 +1,327 @@
+/* pages/logs/logs.wxss - 霓虹科技风 */
+.container {
+  padding: 20rpx;
+  background: linear-gradient(180deg, #0f1a2e 0%, #1a0f2e 100%);
+  min-height: 100vh;
+}
+
+/* 头部区域 */
+.header-section {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+  align-items: center;
+}
+
+.search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+  border: 2rpx solid rgba(102, 126, 234, 0.4);
+  border-radius: 50rpx;
+  box-shadow: 0 0 20rpx rgba(102, 126, 234, 0.2);
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 28rpx;
+}
+
+.search-icon {
+  font-size: 36rpx;
+  color: #667eea;
+  margin-left: 15rpx;
+  filter: drop-shadow(0 0 10rpx rgba(102, 126, 234, 0.8));
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  padding: 20rpx 30rpx;
+  font-size: 28rpx;
+}
+
+.add-icon {
+  font-size: 36rpx;
+  filter: drop-shadow(0 0 10rpx rgba(102, 126, 234, 0.8));
+}
+
+/* 筛选区域 */
+.filter-section {
+  margin-bottom: 30rpx;
+}
+
+.category-filter {
+  white-space: nowrap;
+}
+
+.filter-item {
+  display: inline-block;
+  padding: 18rpx 32rpx;
+  margin-right: 20rpx;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border: 2rpx solid rgba(102, 126, 234, 0.3);
+  border-radius: 30rpx;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 26rpx;
+  transition: all 0.3s ease;
+}
+
+.filter-item:active {
+  transform: scale(0.95);
+}
+
+.filter-item.active {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+  border-color: #667eea;
+  color: #ffffff;
+  box-shadow: 
+    0 0 20rpx rgba(102, 126, 234, 0.5),
+    inset 0 0 20rpx rgba(102, 126, 234, 0.1);
+}
+
+/* 日志列表 */
+.logs-list {
+  margin-bottom: 40rpx;
+}
+
+.log-item {
+  margin-bottom: 25rpx;
+  transition: all 0.3s ease;
+}
+
+.log-item:active {
+  transform: scale(0.98);
+}
+
+.log-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.log-category {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  margin-right: 20rpx;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+  border: 2rpx solid rgba(102, 126, 234, 0.5);
+  box-shadow: 0 0 20rpx rgba(102, 126, 234, 0.4);
+}
+
+.log-info {
+  flex: 1;
+}
+
+.log-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.log-time {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.log-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.action-btn {
+  font-size: 36rpx;
+  padding: 12rpx;
+  border-radius: 50%;
+  background: rgba(102, 126, 234, 0.2);
+  border: 1rpx solid rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+}
+
+.action-btn:active {
+  background: rgba(102, 126, 234, 0.4);
+  transform: scale(0.9);
+  box-shadow: 0 0 20rpx rgba(102, 126, 234, 0.6);
+}
+
+.log-content {
+  margin-bottom: 20rpx;
+}
+
+.log-text {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.8;
+  display: block;
+}
+
+.log-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.tag {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  color: #667eea;
+  padding: 10rpx 20rpx;
+  border-radius: 25rpx;
+  font-size: 22rpx;
+  border: 1rpx solid rgba(102, 126, 234, 0.4);
+  box-shadow: 0 0 10rpx rgba(102, 126, 234, 0.2);
+}
+
+/* 弹窗样式 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 26, 46, 0.9);
+  backdrop-filter: blur(20rpx);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 600rpx;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  border: 2rpx solid rgba(102, 126, 234, 0.4);
+  box-shadow: 0 0 50rpx rgba(102, 126, 234, 0.5);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid rgba(102, 126, 234, 0.3);
+}
+
+.modal-title {
+  font-size: 38rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-close {
+  font-size: 44rpx;
+  color: #999999;
+  padding: 10rpx;
+  transition: all 0.3s ease;
+}
+
+.modal-close:active {
+  color: #667eea;
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  margin-bottom: 30rpx;
+}
+
+.input-group {
+  margin-bottom: 30rpx;
+}
+
+.input-label {
+  font-size: 28rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  margin-bottom: 15rpx;
+  font-weight: bold;
+}
+
+.input-field {
+  background: rgba(102, 126, 234, 0.1);
+  border: 2rpx solid rgba(102, 126, 234, 0.4);
+  border-radius: 20rpx;
+  padding: 30rpx 20rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  line-height: 1.5;
+  min-height: 90rpx;
+}
+
+.input-field:focus {
+  border-color: #667eea;
+  box-shadow: 
+    0 0 0 4rpx rgba(102, 126, 234, 0.2),
+    0 0 30rpx rgba(102, 126, 234, 0.3);
+  background: rgba(102, 126, 234, 0.15);
+}
+
+.textarea-field {
+  background: rgba(102, 126, 234, 0.1);
+  border: 2rpx solid rgba(102, 126, 234, 0.4);
+  border-radius: 20rpx;
+  padding: 30rpx 20rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  width: 100%;
+  height: 200rpx;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  line-height: 1.6;
+}
+
+.textarea-field:focus {
+  border-color: #667eea;
+  box-shadow: 
+    0 0 0 4rpx rgba(102, 126, 234, 0.2),
+    0 0 30rpx rgba(102, 126, 234, 0.3);
+  background: rgba(102, 126, 234, 0.15);
+}
+
+.picker-field {
+  background: rgba(102, 126, 234, 0.1);
+  border: 2rpx solid rgba(102, 126, 234, 0.4);
+  border-radius: 20rpx;
+  padding: 20rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  transition: all 0.3s ease;
+}
+
+.picker-field:active {
+  border-color: #667eea;
+  box-shadow: 
+    0 0 0 4rpx rgba(102, 126, 234, 0.2),
+    0 0 30rpx rgba(102, 126, 234, 0.3);
+}
+
+.modal-footer {
+  display: flex;
+  gap: 20rpx;
+}
+
+.modal-footer button {
+  flex: 1;
+}

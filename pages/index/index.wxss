@@ -1,0 +1,352 @@
+/* pages/index/index.wxss - 霓虹科技风 */
+.container {
+  padding: 20rpx;
+  background: linear-gradient(180deg, #0f1a2e 0%, #1a0f2e 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+.container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 头部区域 */
+.header-section {
+  margin-bottom: 40rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.welcome-card {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  border: 2rpx solid rgba(102, 126, 234, 0.5);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0 40rpx rgba(102, 126, 234, 0.4),
+    inset 0 0 100rpx rgba(102, 126, 234, 0.05);
+}
+
+.welcome-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.welcome-content {
+  text-align: center;
+  padding: 30rpx;
+  position: relative;
+}
+
+.welcome-title {
+  font-size: 56rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  margin-bottom: 15rpx;
+  text-shadow: 0 0 30rpx rgba(102, 126, 234, 0.5);
+}
+
+.welcome-subtitle {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30rpx;
+}
+
+.status-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+  box-shadow: 0 0 20rpx;
+  animation: pulse 2s infinite;
+}
+
+.status-dot.active {
+  background: #667eea;
+  box-shadow: 0 0 30rpx #667eea;
+}
+
+.status-dot.inactive {
+  background: #f5576c;
+  box-shadow: 0 0 30rpx #f5576c;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+.status-text {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 功能模块网格 */
+.modules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.module-card {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+  border: 2rpx solid rgba(102, 126, 234, 0.4);
+  text-align: center;
+  padding: 30rpx 20rpx;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 8rpx 32rpx rgba(0, 0, 0, 0.3),
+    inset 0 0 60rpx rgba(102, 126, 234, 0.05);
+}
+
+.module-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.module-card:active::before {
+  opacity: 1;
+}
+
+.module-card:active {
+  transform: scale(0.95);
+  border-color: #667eea;
+  box-shadow: 0 0 40rpx rgba(102, 126, 234, 0.6);
+}
+
+.module-icon {
+  font-size: 70rpx;
+  margin-bottom: 15rpx;
+  filter: drop-shadow(0 0 10rpx rgba(102, 126, 234, 0.5));
+}
+
+.module-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.module-desc {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
+  margin-bottom: 15rpx;
+}
+
+.module-count {
+  font-size: 22rpx;
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.2);
+  border: 1rpx solid rgba(102, 126, 234, 0.4);
+  padding: 10rpx 20rpx;
+  border-radius: 25rpx;
+  display: inline-block;
+  box-shadow: 0 0 10rpx rgba(102, 126, 234, 0.3);
+}
+
+/* 快速操作 */
+.quick-actions {
+  margin-bottom: 40rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  margin-bottom: 30rpx;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 20rpx;
+  flex-wrap: wrap;
+}
+
+.quick-btn {
+  flex: 1;
+  min-width: 200rpx;
+  font-size: 28rpx;
+  padding: 20rpx;
+}
+
+/* 最近活动 */
+.recent-activity {
+  margin-bottom: 40rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.activity-list {
+  margin-top: 20rpx;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  padding: 25rpx 0;
+  border-bottom: 1rpx solid rgba(102, 126, 234, 0.2);
+  transition: all 0.3s ease;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-item:active {
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 15rpx;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+}
+
+.activity-icon {
+  font-size: 44rpx;
+  margin-right: 20rpx;
+  width: 60rpx;
+  text-align: center;
+  filter: drop-shadow(0 0 8rpx rgba(102, 126, 234, 0.5));
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-title {
+  font-size: 28rpx;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.activity-time {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.activity-type {
+  font-size: 20rpx;
+  padding: 10rpx 20rpx;
+  border-radius: 25rpx;
+  color: #ffffff;
+  border: 1rpx solid;
+}
+
+.activity-type.log {
+  background: rgba(102, 126, 234, 0.3);
+  border-color: rgba(102, 126, 234, 0.5);
+  box-shadow: 0 0 10rpx rgba(102, 126, 234, 0.3);
+}
+
+.activity-type.password {
+  background: rgba(245, 87, 108, 0.3);
+  border-color: rgba(245, 87, 108, 0.5);
+  box-shadow: 0 0 10rpx rgba(245, 87, 108, 0.3);
+}
+
+.activity-type.transaction {
+  background: rgba(240, 147, 251, 0.3);
+  border-color: rgba(240, 147, 251, 0.5);
+  box-shadow: 0 0 10rpx rgba(240, 147, 251, 0.3);
+}
+
+/* 认证弹窗 */
+.auth-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 26, 46, 0.9);
+  backdrop-filter: blur(20rpx);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 600rpx;
+  padding: 40rpx;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  border: 2rpx solid rgba(102, 126, 234, 0.4);
+  box-shadow: 0 0 50rpx rgba(102, 126, 234, 0.5);
+}
+
+.modal-title {
+  font-size: 44rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.modal-subtitle {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  margin-bottom: 40rpx;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 40rpx;
+}
+
+.modal-buttons button {
+  flex: 1;
+}

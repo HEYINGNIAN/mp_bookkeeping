@@ -1,0 +1,142 @@
+<!-- pages/settings/settings.wxml -->
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card card glow-effect">
+    <view class="user-info">
+      <text class="user-title">🔐 安全设置</text>
+      <text class="user-subtitle">保护您的数据安全</text>
+    </view>
+  </view>
+
+  <!-- 主题设置 -->
+  <view class="theme-setting card" bindtap="showThemePicker">
+    <view class="setting-icon">🎨</view>
+    <view class="setting-content">
+      <text class="setting-title">切换主题</text>
+      <text class="setting-desc">当前主题：{{themes[currentTheme].icon}} {{themes[currentTheme].name}}</text>
+    </view>
+    <text class="setting-arrow">></text>
+  </view>
+
+  <!-- 设置选项 -->
+  <view class="settings-list">
+    <view class="setting-item card" bindtap="changePassword">
+      <view class="setting-icon">🔑</view>
+      <view class="setting-content">
+        <text class="setting-title">修改主密码</text>
+        <text class="setting-desc">更改应用的主密码</text>
+      </view>
+      <text class="setting-arrow">></text>
+    </view>
+
+    <view class="setting-item card" bindtap="exportData">
+      <view class="setting-icon">📤</view>
+      <view class="setting-content">
+        <text class="setting-title">导出数据</text>
+        <text class="setting-desc">备份您的所有数据</text>
+      </view>
+      <text class="setting-arrow">></text>
+    </view>
+
+    <view class="setting-item card" bindtap="importData">
+      <view class="setting-icon">📥</view>
+      <view class="setting-content">
+        <text class="setting-title">导入数据</text>
+        <text class="setting-desc">从备份文件恢复数据</text>
+      </view>
+      <text class="setting-arrow">></text>
+    </view>
+
+    <view class="setting-item card" bindtap="clearAllData">
+      <view class="setting-icon">🗑️</view>
+      <view class="setting-content">
+        <text class="setting-title">清空所有数据</text>
+        <text class="setting-desc">删除所有日志、密码和交易记录</text>
+      </view>
+      <text class="setting-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 应用信息 -->
+  <view class="app-info card">
+    <text class="info-title">📱 应用信息</text>
+    <view class="info-item">
+      <text class="info-label">版本号:</text>
+      <text class="info-value">1.0.0</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">开发者:</text>
+      <text class="info-value">智能助手团队</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">数据存储:</text>
+      <text class="info-value">本地存储</text>
+    </view>
+  </view>
+
+  <!-- 统计信息 -->
+  <view class="stats-info card">
+    <text class="info-title">📊 数据统计</text>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-number">{{logCount}}</text>
+        <text class="stat-label">日志</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{passwordCount}}</text>
+        <text class="stat-label">密码</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{transactionCount}}</text>
+        <text class="stat-label">交易</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{categoryCount}}</text>
+        <text class="stat-label">分类</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 主题选择弹窗 -->
+<view class="modal" wx:if="{{showThemePicker}}" bindtap="hideThemePicker">
+  <view class="theme-picker-modal" catchtap="stopPropagation">
+    <view class="modal-header">
+      <text class="modal-title">🎨 选择主题</text>
+      <text class="modal-close" bindtap="hideThemePicker">✕</text>
+    </view>
+    
+    <view class="theme-grid">
+      <view class="theme-item" 
+            wx:for="{{themes}}" 
+            wx:key="id"
+            bindtap="selectTheme"
+            data-theme="{{item.id}}"
+            class="{{currentTheme === item.id ? 'active' : ''}}">
+        <view class="theme-preview" style="background: {{item.background}}">
+          <view class="theme-icon">{{item.icon}}</view>
+          <view class="theme-name">{{item.name}}</view>
+          <view class="theme-badge" wx:if="{{currentTheme === item.id}}">✓</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 确认弹窗 -->
+<view class="modal" wx:if="{{showConfirmModal}}">
+  <view class="modal-content card">
+    <view class="modal-header">
+      <text class="modal-title">{{confirmTitle}}</text>
+    </view>
+    
+    <view class="modal-body">
+      <text class="modal-text">{{confirmText}}</text>
+    </view>
+    
+    <view class="modal-footer">
+      <button class="btn-secondary" bindtap="cancelConfirm">取消</button>
+      <button class="btn-danger" bindtap="confirmAction">确认</button>
+    </view>
+  </view>
+</view>

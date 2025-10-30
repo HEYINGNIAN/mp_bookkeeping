@@ -1,0 +1,84 @@
+<!-- pages/categories/categories.wxml -->
+<view class="container">
+  <!-- 头部添加按钮 -->
+  <view class="header-section">
+    <text class="section-title">🏷️ 分类管理</text>
+    <button class="btn-primary add-btn" bindtap="showAddModal">
+      <text class="add-icon">+</text>
+      添加分类
+    </button>
+  </view>
+
+  <!-- 分类列表 -->
+  <view class="categories-list">
+    <view class="category-item card fade-in" wx:for="{{categories}}" wx:key="id">
+      <view class="category-header">
+        <view class="category-icon" style="background-color: {{item.color}};">
+          {{item.icon}}
+        </view>
+        <view class="category-info">
+          <text class="category-name">{{item.name}}</text>
+          <text class="category-count">{{item.count}} 项</text>
+        </view>
+        <view class="category-actions">
+          <text class="action-btn" bindtap="editCategory" data-id="{{item.id}}">✏️</text>
+          <text class="action-btn" bindtap="deleteCategory" data-id="{{item.id}}">🗑️</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{categories.length === 0}}">
+    <text class="empty-icon">🏷️</text>
+    <text class="empty-text">还没有分类</text>
+    <button class="btn-primary" bindtap="showAddModal">添加第一个分类</button>
+  </view>
+</view>
+
+<!-- 添加/编辑分类弹窗 -->
+<view class="modal" wx:if="{{showModal}}">
+  <view class="modal-content card">
+    <view class="modal-header">
+      <text class="modal-title">{{isEdit ? '编辑分类' : '添加分类'}}</text>
+      <text class="modal-close" bindtap="hideModal">✕</text>
+    </view>
+    
+    <view class="modal-body">
+      <view class="input-group">
+        <text class="input-label">名称</text>
+        <input class="input-field" placeholder="请输入分类名称" bindinput="onNameInput" value="{{formData.name}}" />
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">图标</text>
+        <scroll-view class="icon-selector" scroll-x="true">
+          <text class="icon-item {{formData.icon === item ? 'selected' : ''}}" 
+                wx:for="{{icons}}" 
+                wx:key="*this" 
+                wx:for-item="icon"
+                bindtap="selectIcon" 
+                data-icon="{{icon}}">{{icon}}</text>
+        </scroll-view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">颜色</text>
+        <scroll-view class="color-selector" scroll-x="true">
+          <view class="color-item {{formData.color === item ? 'selected' : ''}}" 
+                wx:for="{{colors}}" 
+                wx:key="*this" 
+                wx:for-item="color"
+                bindtap="selectColor" 
+                data-color="{{color}}"
+                style="background-color: {{color}};"></view>
+        </scroll-view>
+      </view>
+    </view>
+    
+    <view class="modal-footer">
+      <button class="btn-secondary" bindtap="hideModal">取消</button>
+      <button class="btn-primary" bindtap="saveCategory">保存</button>
+    </view>
+  </view>
+</view>

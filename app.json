@@ -1,0 +1,60 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/passwords/passwords",
+    "pages/accounting/accounting",
+    "pages/settings/settings",
+    "pages/auth/auth",
+    "pages/categories/categories"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#0a0a0a",
+    "navigationBarTitleText": "智能助手",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#0a0a0a"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#00ff88",
+    "backgroundColor": "#0a0a0a",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "日志",
+        "iconPath": "images/logs.png",
+        "selectedIconPath": "images/logs-active.png"
+      },
+      {
+        "pagePath": "pages/passwords/passwords",
+        "text": "密码",
+        "iconPath": "images/password.png",
+        "selectedIconPath": "images/password-active.png"
+      },
+      {
+        "pagePath": "pages/accounting/accounting",
+        "text": "流水",
+        "iconPath": "images/accounting.png",
+        "selectedIconPath": "images/accounting-active.png"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "设置",
+        "iconPath": "images/settings.png",
+        "selectedIconPath": "images/settings-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {}
+
+}

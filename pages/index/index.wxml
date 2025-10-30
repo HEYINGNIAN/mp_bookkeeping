@@ -1,0 +1,89 @@
+<!-- pages/index/index.wxml -->
+<view class="container" style="background: {{theme.background}};">
+  <!-- 头部欢迎区域 -->
+  <view class="header-section fade-in">
+    <view class="welcome-card card glow-effect" style="background: {{theme.cardBg}}; border-color: {{theme.cardBorder}};">
+      <view class="welcome-content">
+        <text class="welcome-title" style="color: {{theme.primaryColor}};">🚀 智能助手</text>
+        <text class="welcome-subtitle" style="color: {{theme.textSecondary}}">您的私人数据管理中心</text>
+        <view class="status-indicator">
+          <view class="status-dot {{isAuthenticated ? 'active' : 'inactive'}}"></view>
+          <text class="status-text" style="color: {{theme.textPrimary}}">{{isAuthenticated ? '已解锁' : '需要验证'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能模块网格 -->
+  <view class="modules-grid">
+    <view class="module-card card fade-in" bindtap="navigateToLogs" style="background: {{theme.cardBg}}; border-color: {{theme.cardBorder}};">
+      <view class="module-icon">📝</view>
+      <text class="module-title" style="color: {{theme.textPrimary}}">日志管理</text>
+      <text class="module-desc" style="color: {{theme.textSecondary}}">记录生活点滴</text>
+      <view class="module-count" style="color: {{theme.primaryColor}}">{{logCount}} 条记录</view>
+    </view>
+
+    <view class="module-card card fade-in" bindtap="navigateToPasswords" style="background: {{theme.cardBg}}; border-color: {{theme.cardBorder}};">
+      <view class="module-icon">🔐</view>
+      <text class="module-title" style="color: {{theme.textPrimary}}">密码备忘</text>
+      <text class="module-desc" style="color: {{theme.textSecondary}}">安全存储密码</text>
+      <view class="module-count" style="color: {{theme.primaryColor}}">{{passwordCount}} 个密码</view>
+    </view>
+
+    <view class="module-card card fade-in" bindtap="navigateToAccounting" style="background: {{theme.cardBg}}; border-color: {{theme.cardBorder}};">
+      <view class="module-icon">💰</view>
+      <text class="module-title" style="color: {{theme.textPrimary}}">流水账</text>
+      <text class="module-desc" style="color: {{theme.textSecondary}}">财务管理</text>
+      <view class="module-count" style="color: {{theme.primaryColor}}">{{transactionCount}} 笔交易</view>
+    </view>
+
+    <view class="module-card card fade-in" bindtap="navigateToCategories" style="background: {{theme.cardBg}}; border-color: {{theme.cardBorder}};">
+      <view class="module-icon">🏷️</view>
+      <text class="module-title" style="color: {{theme.textPrimary}}">分类管理</text>
+      <text class="module-desc" style="color: {{theme.textSecondary}}">整理分类</text>
+      <view class="module-count" style="color: {{theme.primaryColor}}">{{categoryCount}} 个分类</view>
+    </view>
+  </view>
+
+  <!-- 快速操作 -->
+  <view class="quick-actions card fade-in" style="background: {{theme.cardBg}}; border-color: {{theme.cardBorder}};">
+    <text class="section-title" style="color: {{theme.textPrimary}}">⚡ 快速操作</text>
+    <view class="action-buttons">
+      <button class="btn-primary quick-btn" bindtap="quickAddLog" style="background-color: {{theme.primaryColor}}; color: white;">添加日志</button>
+      <button class="btn-secondary quick-btn" bindtap="quickAddPassword" style="background-color: {{theme.cardBg}}; color: {{theme.textPrimary}}; border: 1px solid {{theme.primaryColor}};">添加密码</button>
+      <button class="btn-primary quick-btn" bindtap="quickAddTransaction" style="background-color: {{theme.primaryColor}}; color: white;">记录支出</button>
+    </view>
+  </view>
+
+  <!-- 最近活动 -->
+  <view class="recent-activity card fade-in" style="background: {{theme.cardBg}}; border-color: {{theme.cardBorder}};">
+    <text class="section-title" style="color: {{theme.textPrimary}}">📊 最近活动</text>
+    <view class="activity-list" wx:if="{{recentActivities.length > 0}}">
+      <view class="activity-item" wx:for="{{recentActivities}}" wx:key="id">
+        <view class="activity-icon">{{item.icon}}</view>
+        <view class="activity-content">
+          <text class="activity-title" style="color: {{theme.textPrimary}}">{{item.title}}</text>
+          <text class="activity-time" style="color: {{theme.textSecondary}}">{{item.time}}</text>
+        </view>
+        <view class="activity-type {{item.type}}" style="color: {{theme.primaryColor}}">{{item.typeText}}</view>
+      </view>
+    </view>
+    <view class="empty-state" wx:else>
+      <text class="empty-icon">📭</text>
+      <text class="empty-text" style="color: {{theme.textSecondary}}">暂无最近活动</text>
+    </view>
+  </view>
+</view>
+
+<!-- 认证弹窗 -->
+<view class="auth-modal" wx:if="{{showAuthModal}}">
+  <view class="modal-content card" style="background: {{theme.cardBg}}; border-color: {{theme.cardBorder}};">
+      <text class="modal-title" style="color: {{theme.textPrimary}}">🔐 身份验证</text>
+      <text class="modal-subtitle" style="color: {{theme.textSecondary}}">请输入主密码以访问数据</text>
+      <input class="input-field" type="password" placeholder="请输入密码" bindinput="onPasswordInput" value="{{inputPassword}}" style="color: {{theme.textPrimary}}; border-color: {{theme.cardBorder}};" />
+      <view class="modal-buttons">
+        <button class="btn-secondary" bindtap="cancelAuth" style="background-color: {{theme.cardBg}}; color: {{theme.textPrimary}}; border: 1px solid {{theme.primaryColor}};">取消</button>
+        <button class="btn-primary" bindtap="confirmAuth" style="background-color: {{theme.primaryColor}}; color: white;">确认</button>
+      </view>
+  </view>
+</view>

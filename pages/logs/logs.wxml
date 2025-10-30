@@ -1,0 +1,103 @@
+<!-- pages/logs/logs.wxml -->
+<view class="container">
+  <!-- 头部搜索和添加 -->
+  <view class="header-section">
+    <view class="search-bar card">
+      <input class="search-input" placeholder="搜索日志..." bindinput="onSearchInput" value="{{searchKeyword}}" />
+      <text class="search-icon">🔍</text>
+    </view>
+    <button class="btn-primary add-btn" bindtap="showAddModal">
+      <text class="add-icon">+</text>
+      添加日志
+    </button>
+  </view>
+
+  <!-- 分类筛选 -->
+  <view class="filter-section">
+    <scroll-view class="category-filter" scroll-x="true">
+      <view class="filter-item {{selectedCategory === 'all' ? 'active' : ''}}" bindtap="filterByCategory" data-category="all">
+        全部
+      </view>
+      <view class="filter-item {{selectedCategory === item.id ? 'active' : ''}}" 
+            wx:for="{{categories}}" 
+            wx:key="id" 
+            bindtap="filterByCategory" 
+            data-category="{{item.id}}">
+        {{item.icon}} {{item.name}}
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 日志列表 -->
+  <view class="logs-list">
+    <view class="log-item card fade-in" wx:for="{{filteredLogs}}" wx:key="id">
+      <view class="log-header">
+        <view class="log-category {{item.categoryColor}}">
+          {{item.categoryIcon}}
+        </view>
+        <view class="log-info">
+          <text class="log-title">{{item.title}}</text>
+          <text class="log-time">{{item.createTime}}</text>
+        </view>
+        <view class="log-actions">
+          <text class="action-btn" bindtap="editLog" data-id="{{item.id}}">✏️</text>
+          <text class="action-btn" bindtap="deleteLog" data-id="{{item.id}}">🗑️</text>
+        </view>
+      </view>
+      <view class="log-content">
+        <text class="log-text">{{item.content}}</text>
+      </view>
+      <view class="log-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+        <text class="tag" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{filteredLogs.length === 0}}">
+    <text class="empty-icon">📝</text>
+    <text class="empty-text">{{searchKeyword ? '没有找到相关日志' : '还没有日志记录'}}</text>
+    <button class="btn-primary" bindtap="showAddModal" wx:if="{{!searchKeyword}}">添加第一条日志</button>
+  </view>
+</view>
+
+<!-- 添加/编辑日志弹窗 -->
+<view class="modal" wx:if="{{showModal}}">
+  <view class="modal-content card">
+    <view class="modal-header">
+      <text class="modal-title">{{isEdit ? '编辑日志' : '添加日志'}}</text>
+      <text class="modal-close" bindtap="hideModal">✕</text>
+    </view>
+    
+    <view class="modal-body">
+      <view class="input-group">
+        <text class="input-label">标题</text>
+        <input class="input-field" placeholder="请输入日志标题" bindinput="onTitleInput" value="{{formData.title}}" />
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">内容</text>
+        <textarea class="textarea-field" placeholder="请输入日志内容" bindinput="onContentInput" value="{{formData.content}}"></textarea>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">分类</text>
+        <picker bindchange="onCategoryChange" value="{{categoryIndex}}" range="{{categoryNames}}">
+          <view class="picker-field">
+            {{formData.categoryName || '请选择分类'}}
+          </view>
+        </picker>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">标签 (用逗号分隔)</text>
+        <input class="input-field" placeholder="例如: 重要,工作,会议" bindinput="onTagsInput" value="{{formData.tags}}" />
+      </view>
+    </view>
+    
+    <view class="modal-footer">
+      <button class="btn-secondary" bindtap="hideModal">取消</button>
+      <button class="btn-primary" bindtap="saveLog">保存</button>
+    </view>
+  </view>
+</view>

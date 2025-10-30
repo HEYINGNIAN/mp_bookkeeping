@@ -1,0 +1,169 @@
+<!-- pages/accounting/accounting.wxml -->
+<view class="container">
+  <!-- 统计卡片 -->
+  <view class="stats-section">
+    <view class="stats-card card glow-effect">
+      <view class="stats-header">
+        <text class="stats-title">💰 财务概览</text>
+        <text class="stats-period">{{currentMonth}}</text>
+      </view>
+      <view class="stats-content">
+        <view class="stat-item income">
+          <text class="stat-label">收入</text>
+          <text class="stat-value">+¥{{totalIncome}}</text>
+        </view>
+        <view class="stat-item expense">
+          <text class="stat-label">支出</text>
+          <text class="stat-value">-¥{{totalExpense}}</text>
+        </view>
+        <view class="stat-item balance">
+          <text class="stat-label">结余</text>
+          <text class="stat-value {{balance >= 0 ? 'positive' : 'negative'}}">
+            {{balance >= 0 ? '+' : ''}}¥{{balance}}
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="actions-section">
+    <button class="btn-primary action-btn" bindtap="showAddModal" data-type="income">
+      <text class="btn-icon">📈</text>
+      记录收入
+    </button>
+    <button class="btn-danger action-btn" bindtap="showAddModal" data-type="expense">
+      <text class="btn-icon">📉</text>
+      记录支出
+    </button>
+  </view>
+
+  <!-- 筛选和搜索 -->
+  <view class="filter-section">
+    <view class="search-bar card">
+      <input class="search-input" placeholder="搜索交易..." bindinput="onSearchInput" value="{{searchKeyword}}" />
+      <text class="search-icon">🔍</text>
+    </view>
+    <scroll-view class="type-filter" scroll-x="true">
+      <view class="filter-item {{selectedType === 'all' ? 'active' : ''}}" bindtap="filterByType" data-type="all">
+        全部
+      </view>
+      <view class="filter-item {{selectedType === 'income' ? 'active' : ''}}" bindtap="filterByType" data-type="income">
+        📈 收入
+      </view>
+      <view class="filter-item {{selectedType === 'expense' ? 'active' : ''}}" bindtap="filterByType" data-type="expense">
+        📉 支出
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 交易列表 -->
+  <view class="transactions-list">
+    <view class="transaction-item card fade-in" wx:for="{{filteredTransactions}}" wx:key="id">
+      <view class="transaction-header">
+        <view class="transaction-icon {{item.type}}">
+          {{item.type === 'income' ? '📈' : '📉'}}
+        </view>
+        <view class="transaction-info">
+          <text class="transaction-title">{{item.title}}</text>
+          <text class="transaction-category">{{item.category}}</text>
+        </view>
+        <view class="transaction-amount {{item.type}}">
+          {{item.type === 'income' ? '+' : '-'}}¥{{item.amount}}
+        </view>
+      </view>
+      
+      <view class="transaction-content">
+        <view class="transaction-field" wx:if="{{item.note}}">
+          <text class="field-label">备注:</text>
+          <text class="field-value">{{item.note}}</text>
+        </view>
+        <view class="transaction-field">
+          <text class="field-label">时间:</text>
+          <text class="field-value">{{item.createTime}}</text>
+        </view>
+      </view>
+      
+      <view class="transaction-actions">
+        <text class="action-btn" bindtap="editTransaction" data-id="{{item.id}}">✏️</text>
+        <text class="action-btn" bindtap="deleteTransaction" data-id="{{item.id}}">🗑️</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{filteredTransactions.length === 0}}">
+    <text class="empty-icon">💰</text>
+    <text class="empty-text">{{searchKeyword ? '没有找到相关交易' : '还没有交易记录'}}</text>
+    <text class="empty-tip" wx:if="{{!searchKeyword}}">点击下方按钮开始记账</text>
+    <button class="btn-primary" bindtap="showAddModal" wx:if="{{!searchKeyword}}">记录第一笔交易</button>
+  </view>
+  
+  <!-- 使用引导 -->
+  <view class="guide-tip" wx:if="{{transactions.length === 0 && showGuide !== false}}">
+    <view class="guide-content">
+      <text class="guide-title">💡 记账小贴士</text>
+      <text class="guide-item">• 点击「+」添加新交易</text>
+      <text class="guide-item">• 可在分类管理中自定义分类</text>
+      <text class="guide-item">• 使用搜索功能快速查找交易</text>
+      <view class="guide-actions">
+        <button class="btn-secondary small" bindtap="hideGuide">不再显示</button>
+        <button class="btn-primary small" bindtap="showAddModal">开始记账</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 添加/编辑交易弹窗 -->
+<view class="modal" wx:if="{{showModal}}">
+  <view class="modal-content card">
+    <view class="modal-header">
+      <text class="modal-title">{{isEdit ? '编辑交易' : '添加交易'}}</text>
+      <text class="modal-close" bindtap="hideModal">✕</text>
+    </view>
+    
+    <view class="modal-body">
+      <view class="type-selector">
+        <view class="type-option {{formData.type === 'income' ? 'active' : ''}}" 
+              bindtap="selectType" data-type="income">
+          <text class="type-icon">📈</text>
+          <text class="type-text">收入</text>
+        </view>
+        <view class="type-option {{formData.type === 'expense' ? 'active' : ''}}" 
+              bindtap="selectType" data-type="expense">
+          <text class="type-icon">📉</text>
+          <text class="type-text">支出</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">金额</text>
+        <input class="input-field amount-input" type="digit" placeholder="0.00" bindinput="onAmountInput" value="{{formData.amount}}" />
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">标题</text>
+        <input class="input-field" placeholder="请输入交易标题" bindinput="onTitleInput" value="{{formData.title}}" />
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">分类</text>
+        <picker bindchange="onCategoryChange" value="{{categoryIndex}}" range="{{categoryNames}}">
+          <view class="picker-field">
+            {{formData.category || '请选择分类'}}
+          </view>
+        </picker>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">备注 (可选)</text>
+        <textarea class="textarea-field" placeholder="添加备注信息" bindinput="onNoteInput" value="{{formData.note}}"></textarea>
+      </view>
+    </view>
+    
+    <view class="modal-footer">
+      <button class="btn-secondary" bindtap="hideModal">取消</button>
+      <button class="btn-primary" bindtap="saveTransaction">保存</button>
+    </view>
+  </view>
+</view>
