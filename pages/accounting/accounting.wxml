@@ -115,7 +115,7 @@
 </view>
 
 <!-- 添加/编辑交易弹窗 -->
-<view class="modal" wx:if="{{showModal}}">
+<view class="modal" wx:if="{{showModal}}" catchtouchmove="true">
   <view class="modal-content card">
     <view class="modal-header">
       <text class="modal-title">{{isEdit ? '编辑交易' : '添加交易'}}</text>
@@ -138,12 +138,12 @@
       
       <view class="input-group">
         <text class="input-label">金额</text>
-        <input class="input-field amount-input" type="digit" placeholder="0.00" bindinput="onAmountInput" value="{{formData.amount}}" />
+        <input class="input-field amount-input" type="digit" placeholder="0.00" bindinput="onAmountInput" value="{{formData.amount}}" adjust-position="{{false}}" />
       </view>
       
       <view class="input-group">
         <text class="input-label">标题</text>
-        <input class="input-field" placeholder="请输入交易标题" bindinput="onTitleInput" value="{{formData.title}}" />
+        <input class="input-field" placeholder="请输入交易标题" bindinput="onTitleInput" value="{{formData.title}}" adjust-position="{{false}}" />
       </view>
       
       <view class="input-group">
@@ -157,7 +157,7 @@
       
       <view class="input-group">
         <text class="input-label">备注 (可选)</text>
-        <textarea class="textarea-field" placeholder="添加备注信息" bindinput="onNoteInput" value="{{formData.note}}"></textarea>
+        <textarea class="textarea-field" placeholder="添加备注信息" bindinput="onNoteInput" value="{{formData.note}}" adjust-position="{{false}}" auto-height="{{true}}"></textarea>
       </view>
     </view>
     

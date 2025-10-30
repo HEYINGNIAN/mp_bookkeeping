@@ -24,7 +24,12 @@ Page({
 
   onShow() {
     this.applyTheme()
-    this.checkAuthStatus()
+    // 优化认证检查，避免重复认证
+    // 只有在页面是从其他页面返回时才检查认证状态
+    const pages = getCurrentPages()
+    if (pages.length === 1 || pages[pages.length - 1].route !== 'pages/auth/auth') {
+      this.checkAuthStatus()
+    }
     this.loadData()
   },
 

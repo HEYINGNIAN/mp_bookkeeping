@@ -161,10 +161,13 @@ Page({
             url: '/pages/index/index'
           })
         } else {
-          // 登录模式返回上一页
-          wx.navigateBack()
+          // 登录模式，使用switchTab直接跳转到主页而不是navigateBack
+          // 这样可以确保回到主页时不会触发重复的认证检查
+          wx.switchTab({
+            url: '/pages/index/index'
+          })
         }
-      }, 1500)
+      }, 1000)
     } catch (error) {
       console.error('认证处理失败:', error)
       wx.showToast({

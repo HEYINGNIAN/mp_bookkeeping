@@ -194,19 +194,45 @@
   background: rgba(15, 26, 46, 0.9);
   backdrop-filter: blur(20rpx);
   display: flex;
-  align-items: center;
+  /* 修改为flex-end，将模态框固定在屏幕底部 */
+  align-items: flex-end;
   justify-content: center;
   z-index: 1000;
+  /* 确保在输入法弹出时不会被顶起 */
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-content {
-  width: 90%;
-  max-width: 600rpx;
-  max-height: 80vh;
+  width: 100%;
+  /* 增加最大高度，确保内容可以完整显示 */
+  max-height: 85vh;
+  /* 确保内容始终可见并可以滚动 */
   overflow-y: auto;
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
   border: 2rpx solid rgba(102, 126, 234, 0.4);
-  box-shadow: 0 0 50rpx rgba(102, 126, 234, 0.5);
+  border-radius: 25rpx 25rpx 0 0;
+  box-shadow: 0 -5rpx 50rpx rgba(102, 126, 234, 0.5);
+  /* 固定定位，防止被输入法顶起 */
+  position: relative;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+  /* 增加滚动条样式 */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+/* 隐藏滚动条但保留功能 */
+.modal-content::-webkit-scrollbar {
+  width: 6rpx;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3rpx;
 }
 
 .modal-header {

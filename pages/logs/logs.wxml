@@ -62,7 +62,7 @@
 </view>
 
 <!-- 添加/编辑日志弹窗 -->
-<view class="modal" wx:if="{{showModal}}">
+<view class="modal" wx:if="{{showModal}}" catchtouchmove="true">
   <view class="modal-content card">
     <view class="modal-header">
       <text class="modal-title">{{isEdit ? '编辑日志' : '添加日志'}}</text>
@@ -72,12 +72,12 @@
     <view class="modal-body">
       <view class="input-group">
         <text class="input-label">标题</text>
-        <input class="input-field" placeholder="请输入日志标题" bindinput="onTitleInput" value="{{formData.title}}" />
+        <input class="input-field" placeholder="请输入日志标题" bindinput="onTitleInput" value="{{formData.title}}" adjust-position="{{false}}" />
       </view>
       
       <view class="input-group">
         <text class="input-label">内容</text>
-        <textarea class="textarea-field" placeholder="请输入日志内容" bindinput="onContentInput" value="{{formData.content}}"></textarea>
+        <textarea class="textarea-field" placeholder="请输入日志内容" bindinput="onContentInput" value="{{formData.content}}" adjust-position="{{false}}" auto-height="{{true}}"></textarea>
       </view>
       
       <view class="input-group">
@@ -91,7 +91,7 @@
       
       <view class="input-group">
         <text class="input-label">标签 (用逗号分隔)</text>
-        <input class="input-field" placeholder="例如: 重要,工作,会议" bindinput="onTagsInput" value="{{formData.tags}}" />
+        <input class="input-field" placeholder="例如: 重要,工作,会议" bindinput="onTagsInput" value="{{formData.tags}}" adjust-position="{{false}}" />
       </view>
     </view>
     
